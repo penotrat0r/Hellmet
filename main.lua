@@ -10,7 +10,7 @@ local TeleportCheck = false
 plr.OnTeleport:Connect(function(State)
     if (not TeleportCheck) and queueteleport then
         TeleportCheck = true
-        queueteleport([[script here]])
+        queueteleport("https://raw.githubusercontent.com/penotrat0r/Hellmet-intergrated/main/main.lua")
     end
 end)
 
