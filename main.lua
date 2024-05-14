@@ -162,3 +162,5 @@ function createLib(windowName)
     minimize()
     close()
 end
+
+return createLib
