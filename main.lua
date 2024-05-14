@@ -43,7 +43,7 @@ function createLib(windowName)
     TextLabel.BorderSizePixel = 0
     TextLabel.Position = UDim2.new(0, 5, 0, 5)
     TextLabel.Size = UDim2.new(0, 100, 1, -10)
-    TextLabel.Font = Enum.Font.GothamSemibold
+    TextLabel.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
     TextLabel.Text = windowName
     TextLabel.TextColor3 = Color3.fromRGB(230, 230, 230)
     TextLabel.TextSize = 20.000
@@ -60,7 +60,7 @@ function createLib(windowName)
     Min.Position = UDim2.new(0, 370, 0, -5)
     Min.Size = UDim2.new(0, 20, 0, 20)
     Min.AutoButtonColor = false
-    Min.Font = Enum.Font.GothamSemibold
+    Min.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
     Min.Text = "-"
     Min.TextColor3 = Color3.fromRGB(230, 230, 230)
     Min.TextSize = 30.000
@@ -76,7 +76,7 @@ function createLib(windowName)
     Close.Position = UDim2.new(1, -5, 0, -5)
     Close.Size = UDim2.new(0, 20, 0, 20)
     Close.AutoButtonColor = false
-    Close.Font = Enum.Font.GothamSemibold
+    Close.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
     Close.Text = "X"
     Close.TextColor3 = Color3.fromRGB(230, 230, 230)
     Close.TextSize = 30.000
@@ -162,7 +162,3 @@ function createLib(windowName)
     minimize()
     close()
 end
-
-return {
-    createLib = createLib
-}
