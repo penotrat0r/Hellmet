@@ -163,4 +163,6 @@ function createLib(windowName)
     close()
 end
 
-return createLib
+return {
+    createLib = createLib
+}
