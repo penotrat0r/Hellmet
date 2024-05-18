@@ -2,18 +2,21 @@ local ScreenGui = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local ScrollingFrame = Instance.new("ScrollingFrame")
 local OPgun = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
-local TextLabel_2 = Instance.new("TextLabel")
+local Gun = Instance.new("TextLabel")
+local Visual = Instance.new("TextLabel")
 local ESP = Instance.new("TextButton")
-local TextLabel_3 = Instance.new("TextLabel")
+local Other = Instance.new("TextLabel")
 local INFYEILD = Instance.new("TextButton")
-local TextLabel_4 = Instance.new("TextLabel")
-local TextLabel_5 = Instance.new("TextLabel")
+local Credits = Instance.new("TextLabel")
 local Fullbright = Instance.new("TextButton")
+local Credit = Instance.new("TextLabel")
+local Online = Instance.new("TextLabel")
+local OnlineESP = Instance.new("TextButton")
 local Frame = Instance.new("Frame")
-local TextLabel_6 = Instance.new("TextLabel")
+local TextLabel = Instance.new("TextLabel")
 local Min = Instance.new("TextButton")
 local Close = Instance.new("TextButton")
+local plr = game.Players.LocalPlayer
 
 --Properties:
 
@@ -37,7 +40,6 @@ ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ScrollingFrame.BackgroundTransparency = 1.000
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ScrollingFrame.BorderSizePixel = 0
-ScrollingFrame.ClipsDescendants = true
 ScrollingFrame.Position = UDim2.new(0.0274999999, 0, 0.0179999992, 0)
 ScrollingFrame.Size = UDim2.new(0, 378, 0, 481)
 ScrollingFrame.ScrollBarThickness = 7
@@ -55,29 +57,31 @@ OPgun.Text = "Op Gun"
 OPgun.TextColor3 = Color3.fromRGB(230, 230, 230)
 OPgun.TextSize = 16.000
 
-TextLabel.Parent = ScrollingFrame
-TextLabel.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.Position = UDim2.new(0, 5, 0, 5)
-TextLabel.Size = UDim2.new(0, 150, 0, 20)
-TextLabel.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel.Text = "Guns"
-TextLabel.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel.TextSize = 16.000
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+Gun.Name = "Gun"
+Gun.Parent = ScrollingFrame
+Gun.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Gun.BackgroundTransparency = 1.000
+Gun.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Gun.Position = UDim2.new(0, 5, 0, 5)
+Gun.Size = UDim2.new(0, 150, 0, 20)
+Gun.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Gun.Text = "Guns"
+Gun.TextColor3 = Color3.fromRGB(230, 230, 230)
+Gun.TextSize = 16.000
+Gun.TextXAlignment = Enum.TextXAlignment.Left
 
-TextLabel_2.Parent = ScrollingFrame
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_2.BackgroundTransparency = 1.000
-TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.Position = UDim2.new(0, 5, 0, 65)
-TextLabel_2.Size = UDim2.new(0, 150, 0, 20)
-TextLabel_2.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel_2.Text = "Visual"
-TextLabel_2.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_2.TextSize = 16.000
-TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+Visual.Name = "Visual"
+Visual.Parent = ScrollingFrame
+Visual.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Visual.BackgroundTransparency = 1.000
+Visual.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Visual.Position = UDim2.new(0, 5, 0, 65)
+Visual.Size = UDim2.new(0, 150, 0, 20)
+Visual.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Visual.Text = "Visual"
+Visual.TextColor3 = Color3.fromRGB(230, 230, 230)
+Visual.TextSize = 16.000
+Visual.TextXAlignment = Enum.TextXAlignment.Left
 
 ESP.Name = "ESP"
 ESP.Parent = ScrollingFrame
@@ -92,17 +96,18 @@ ESP.Text = "ESP"
 ESP.TextColor3 = Color3.fromRGB(230, 230, 230)
 ESP.TextSize = 16.000
 
-TextLabel_3.Parent = ScrollingFrame
-TextLabel_3.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_3.BackgroundTransparency = 1.000
-TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_3.Position = UDim2.new(0, 5, 0, 155)
-TextLabel_3.Size = UDim2.new(0, 150, 0, 20)
-TextLabel_3.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel_3.Text = "Other"
-TextLabel_3.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_3.TextSize = 16.000
-TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+Other.Name = "Other"
+Other.Parent = ScrollingFrame
+Other.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Other.BackgroundTransparency = 1.000
+Other.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Other.Position = UDim2.new(0, 5, 0, 215)
+Other.Size = UDim2.new(0, 150, 0, 20)
+Other.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Other.Text = "Other"
+Other.TextColor3 = Color3.fromRGB(230, 230, 230)
+Other.TextSize = 16.000
+Other.TextXAlignment = Enum.TextXAlignment.Left
 
 INFYEILD.Name = "INF YEILD"
 INFYEILD.Parent = ScrollingFrame
@@ -110,36 +115,25 @@ INFYEILD.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 INFYEILD.BackgroundTransparency = 0.900
 INFYEILD.BorderColor3 = Color3.fromRGB(0, 0, 0)
 INFYEILD.BorderSizePixel = 0
-INFYEILD.Position = UDim2.new(0, 5, 0, 185)
+INFYEILD.Position = UDim2.new(0, 5, 0, 235)
 INFYEILD.Size = UDim2.new(0, 236, 0, 21)
 INFYEILD.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 INFYEILD.Text = "INF YEILD"
 INFYEILD.TextColor3 = Color3.fromRGB(230, 230, 230)
 INFYEILD.TextSize = 16.000
 
-TextLabel_4.Parent = ScrollingFrame
-TextLabel_4.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_4.BackgroundTransparency = 1.000
-TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_4.Position = UDim2.new(0, 5, 0, 215)
-TextLabel_4.Size = UDim2.new(0, 150, 0, 20)
-TextLabel_4.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel_4.Text = "Credits"
-TextLabel_4.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_4.TextSize = 16.000
-TextLabel_4.TextXAlignment = Enum.TextXAlignment.Left
-
-TextLabel_5.Parent = ScrollingFrame
-TextLabel_5.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_5.BackgroundTransparency = 0.900
-TextLabel_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_5.BorderSizePixel = 0
-TextLabel_5.Position = UDim2.new(0, 5, 0, 245)
-TextLabel_5.Size = UDim2.new(0, 236, 0, 21)
-TextLabel_5.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel_5.Text = "@pen0tra0r"
-TextLabel_5.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_5.TextSize = 16.000
+Credits.Name = "Credits"
+Credits.Parent = ScrollingFrame
+Credits.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Credits.BackgroundTransparency = 1.000
+Credits.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Credits.Position = UDim2.new(0, 5, 0, 265)
+Credits.Size = UDim2.new(0, 150, 0, 20)
+Credits.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Credits.Text = "Credits"
+Credits.TextColor3 = Color3.fromRGB(230, 230, 230)
+Credits.TextSize = 16.000
+Credits.TextXAlignment = Enum.TextXAlignment.Left
 
 Fullbright.Name = "Fullbright"
 Fullbright.Parent = ScrollingFrame
@@ -154,6 +148,45 @@ Fullbright.Text = "Fullbright"
 Fullbright.TextColor3 = Color3.fromRGB(230, 230, 230)
 Fullbright.TextSize = 16.000
 
+Credit.Name = "Credit"
+Credit.Parent = ScrollingFrame
+Credit.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Credit.BackgroundTransparency = 0.900
+Credit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Credit.BorderSizePixel = 0
+Credit.Position = UDim2.new(0, 5, 0, 295)
+Credit.Size = UDim2.new(0, 236, 0, 21)
+Credit.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Credit.Text = "@pen0tra0r"
+Credit.TextColor3 = Color3.fromRGB(230, 230, 230)
+Credit.TextSize = 16.000
+
+Online.Name = "Online"
+Online.Parent = ScrollingFrame
+Online.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Online.BackgroundTransparency = 1.000
+Online.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Online.Position = UDim2.new(0, 5, 0, 155)
+Online.Size = UDim2.new(0, 150, 0, 20)
+Online.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Online.Text = "Online"
+Online.TextColor3 = Color3.fromRGB(230, 230, 230)
+Online.TextSize = 16.000
+Online.TextXAlignment = Enum.TextXAlignment.Left
+
+OnlineESP.Name = "Online ESP"
+OnlineESP.Parent = ScrollingFrame
+OnlineESP.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+OnlineESP.BackgroundTransparency = 0.900
+OnlineESP.BorderColor3 = Color3.fromRGB(0, 0, 0)
+OnlineESP.BorderSizePixel = 0
+OnlineESP.Position = UDim2.new(0, 5, 0, 185)
+OnlineESP.Size = UDim2.new(0, 236, 0, 21)
+OnlineESP.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+OnlineESP.Text = "Online ESP"
+OnlineESP.TextColor3 = Color3.fromRGB(230, 230, 230)
+OnlineESP.TextSize = 16.000
+
 Frame.Parent = Main
 Frame.AnchorPoint = Vector2.new(0, 1)
 Frame.BackgroundColor3 = Color3.fromRGB(200, 20, 20)
@@ -162,18 +195,18 @@ Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Size = UDim2.new(1, 0, 0, 30)
 
-TextLabel_6.Parent = Frame
-TextLabel_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_6.BackgroundTransparency = 1.000
-TextLabel_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_6.BorderSizePixel = 0
-TextLabel_6.Position = UDim2.new(0, 5, 0, 5)
-TextLabel_6.Size = UDim2.new(0, 100, 1, -10)
-TextLabel_6.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel_6.Text = "Hellmet script"
-TextLabel_6.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel_6.TextSize = 20.000
-TextLabel_6.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0, 5, 0, 5)
+TextLabel.Size = UDim2.new(0, 100, 1, -10)
+TextLabel.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+TextLabel.Text = "Hellmet script"
+TextLabel.TextColor3 = Color3.fromRGB(230, 230, 230)
+TextLabel.TextSize = 20.000
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
 Min.Name = "Min"
 Min.Parent = Main
@@ -209,11 +242,10 @@ Close.TextSize = 30.000
 
 -- Scripts:
 
-local function HGZQ_fake_script() -- OPgun.LocalScript 
+local function XKJO_fake_script() -- OPgun.LocalScript 
 	local script = Instance.new('LocalScript', OPgun)
 
 	script.Parent.MouseButton1Click:Connect(function()
-		local plr = game.Players.LocalPlayer
 		local char = plr.Character
 		local backpack = plr.Backpack
 		local tool = char:FindFirstChildWhichIsA("Tool")
@@ -229,8 +261,8 @@ local function HGZQ_fake_script() -- OPgun.LocalScript
 		end
 	end)
 end
-coroutine.wrap(HGZQ_fake_script)()
-local function MAUIK_fake_script() -- ESP.LocalScript 
+coroutine.wrap(XKJO_fake_script)()
+local function CHXS_fake_script() -- ESP.LocalScript 
 	local script = Instance.new('LocalScript', ESP)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -267,16 +299,16 @@ local function MAUIK_fake_script() -- ESP.LocalScript
 		print("ESP loaded")
 	end)
 end
-coroutine.wrap(MAUIK_fake_script)()
-local function KNIU_fake_script() -- INFYEILD.LocalScript 
+coroutine.wrap(CHXS_fake_script)()
+local function IMQB_fake_script() -- INFYEILD.LocalScript 
 	local script = Instance.new('LocalScript', INFYEILD)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 end
-coroutine.wrap(KNIU_fake_script)()
-local function FSPOG_fake_script() -- Fullbright.LocalScript 
+coroutine.wrap(IMQB_fake_script)()
+local function FPGFQU_fake_script() -- Fullbright.LocalScript 
 	local script = Instance.new('LocalScript', Fullbright)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -288,8 +320,106 @@ local function FSPOG_fake_script() -- Fullbright.LocalScript
 		Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
 	end)
 end
-coroutine.wrap(FSPOG_fake_script)()
-local function ZZPVHRL_fake_script() -- Frame.Drag 
+coroutine.wrap(FPGFQU_fake_script)()
+local function IOKGG_fake_script() -- OnlineESP.LocalScript 
+	local script = Instance.new('LocalScript', OnlineESP)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		local camera = game.Workspace.CurrentCamera
+	
+		function isTeammate(player)
+			if player and player.Team and plr.Team then
+				return player.Team == plr.Team
+			end
+			return false
+		end
+	
+		local function createESP(player)
+			local Top = Drawing.new("Line")
+			Top.Visible = false
+			Top.Color = Color3.fromRGB(255, 0, 0)
+			Top.Thickness = 2
+			Top.Transparency = 1
+	
+			local Bottom = Drawing.new("Line")
+			Bottom.Visible = false
+			Bottom.Color = Color3.fromRGB(255, 0, 0)
+			Bottom.Thickness = 2
+			Bottom.Transparency = 1
+	
+			local Left = Drawing.new("Line")
+			Left.Visible = false
+			Left.Color = Color3.fromRGB(255, 0, 0)
+			Left.Thickness = 2
+			Left.Transparency = 1
+	
+			local Right = Drawing.new("Line")
+			Right.Visible = false
+			Right.Color = Color3.fromRGB(255, 0, 0)
+			Right.Thickness = 2
+			Right.Transparency = 1
+	
+			function ESP()
+				local connection
+				connection = game:GetService("RunService").RenderStepped:Connect(function()
+					if player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Name ~= plr.Name and player.Character.Humanoid.Health > 0 and not isTeammate(player) then
+						local ScreenPos, OnScreen = camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
+						if OnScreen then
+							local Scale = player.Character.Head.Size.Y / 2
+							local Size = Vector3.new(2, 3, 0) * (Scale * 2)
+							local humpos = camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
+							local TL = camera:WorldToViewportPoint((player.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, 0)).p)
+							local TR = camera:WorldToViewportPoint((player.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, 0)).p)
+							local BL = camera:WorldToViewportPoint((player.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, 0)).p)
+							local BR = camera:WorldToViewportPoint((player.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, 0)).p)
+	
+							Top.From = Vector2.new(TL.X, TL.Y)
+							Top.To = Vector2.new(TR.X, TR.Y)
+	
+							Left.From = Vector2.new(TL.X, TL.Y)
+							Left.To = Vector2.new(BL.X, BL.Y)
+	
+							Right.From = Vector2.new(TR.X, TR.Y)
+							Right.To = Vector2.new(BR.X, BR.Y)
+	
+							Bottom.From = Vector2.new(BL.X, BL.Y)
+							Bottom.To = Vector2.new(BR.X, BR.Y)
+	
+							Top.Visible = true
+							Left.Visible = true
+							Bottom.Visible = true
+							Right.Visible = true
+						else
+							Top.Visible = false
+							Left.Visible = false
+							Bottom.Visible = false
+							Right.Visible = false
+						end
+					else
+						Top.Visible = false
+						Left.Visible = false
+						Bottom.Visible = false
+						Right.Visible = false
+						if not game.Players:FindFirstChild(player.Name) then
+							connection:Disconnect()
+						end
+					end
+				end)
+			end
+			coroutine.wrap(ESP)()
+		end
+	
+		for _, player in ipairs(game.Players:GetPlayers()) do
+			createESP(player)
+		end
+	
+		game.Players.PlayerAdded:Connect(function(newplr)
+			createESP(newplr)
+		end)
+	end)
+end
+coroutine.wrap(IOKGG_fake_script)()
+local function ZTMKLZV_fake_script() -- Frame.Drag 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -327,8 +457,8 @@ local function ZZPVHRL_fake_script() -- Frame.Drag
 		end
 	end)
 end
-coroutine.wrap(ZZPVHRL_fake_script)()
-local function VCRQ_fake_script() -- Main.Close 
+coroutine.wrap(ZTMKLZV_fake_script)()
+local function GIWBO_fake_script() -- Main.Close 
 	local script = Instance.new('LocalScript', Main)
 
 	local FrameObject = script.Parent -- Change Stats to whatever your frame is called
@@ -346,14 +476,12 @@ local function VCRQ_fake_script() -- Main.Close
 		
 	end)
 end
-
-coroutine.wrap(VCRQ_fake_script)()
-local function WGVFB_fake_script() -- Min.LocalScript 
+coroutine.wrap(GIWBO_fake_script)()
+local function OOHN_fake_script() -- Min.LocalScript 
 	local script = Instance.new('LocalScript', Min)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("CLOSED")
-		local plr = game:GetService("Players").LocalPlayer
 		game.StarterGui:SetCore("SendNotification", {
 			Title = "Closed."; -- the title 
 			Text = 'Press "k" to open again.'; -- what the text says 
@@ -362,8 +490,8 @@ local function WGVFB_fake_script() -- Min.LocalScript
 		script.Parent.Parent.Visible = false
 	end)
 end
-coroutine.wrap(WGVFB_fake_script)()
-local function USIMPPV_fake_script() -- Close.LocalScript 
+coroutine.wrap(OOHN_fake_script)()
+local function MJSHDU_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -371,4 +499,4 @@ local function USIMPPV_fake_script() -- Close.LocalScript
 		script.Parent.Parent.Parent:Destroy()
 	end)
 end
-coroutine.wrap(USIMPPV_fake_script)()
+coroutine.wrap(MJSHDU_fake_script)()
