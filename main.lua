@@ -166,7 +166,6 @@ function createWindow(windowTitle)
             print("CLOSED")
             script.Parent.Parent.Parent:Destroy()
             BlurEffect.Enabled = false  -- Disable blur effect
-            toggleMouseBehavior(false)  -- Lock mouse to center
         end)
     end
     coroutine.wrap(QRKGSXI_fake_script)()
