@@ -1,331 +1,260 @@
-local ScreenGui = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local ScrollingFrame = Instance.new("ScrollingFrame")
-local OPgun = Instance.new("TextButton")
-local Gun = Instance.new("TextLabel")
-local Visual = Instance.new("TextLabel")
-local ESP = Instance.new("TextButton")
-local Other = Instance.new("TextLabel")
-local INFYEILD = Instance.new("TextButton")
-local Credits = Instance.new("TextLabel")
-local Fullbright = Instance.new("TextButton")
-local Credit = Instance.new("TextLabel")
-local Online = Instance.new("TextLabel")
-local OnlineESP = Instance.new("TextButton")
-local Frame = Instance.new("Frame")
-local TextLabel = Instance.new("TextLabel")
-local Min = Instance.new("TextButton")
-local Close = Instance.new("TextButton")
-local plr = game.Players.LocalPlayer
+function createWindow(windowTitle)
+    -- Create Instances
+    local ScreenGui = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local ScrollingFrame = Instance.new("ScrollingFrame")
+    local UIListLayout = Instance.new("UIListLayout")
+    local Frame = Instance.new("Frame")
+    local Name = Instance.new("TextLabel")
+    local Min = Instance.new("TextButton")
+    local Close = Instance.new("TextButton")
+    local BlurEffect = Instance.new("BlurEffect")  -- BlurEffect instance
+  
+    -- Set Properties
+    ScreenGui.Parent = game.CoreGui
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.ResetOnSpawn = false
 
---Properties:
+    -- BlurEffect Properties
+    BlurEffect.Parent = game.Lighting
+    BlurEffect.Size = 24  -- Adjust the blur size as needed
+    BlurEffect.Enabled = true  -- Initially disabled
+  
+    Main.Name = "Main"
+    Main.Parent = ScreenGui
+    Main.AnchorPoint = Vector2.new(0.5, 0.5)
+    Main.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    Main.BackgroundTransparency = 0.900
+    Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Main.BorderSizePixel = 0
+    Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Main.Size = UDim2.new(0, 400, 0, 500)
+  
+    ScrollingFrame.Parent = Main
+    ScrollingFrame.Active = true
+    ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ScrollingFrame.BackgroundTransparency = 1.000
+    ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ScrollingFrame.BorderSizePixel = 0
+    ScrollingFrame.Position = UDim2.new(0.0274999999, 0, 0.0179999992, 0)
+    ScrollingFrame.Size = UDim2.new(0, 378, 0, 481)
+    ScrollingFrame.ScrollBarThickness = 7
+  
+    UIListLayout.Parent = ScrollingFrame
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 13)
+  
+    Frame.Parent = Main
+    Frame.AnchorPoint = Vector2.new(0, 1)
+    Frame.BackgroundColor3 = Color3.fromRGB(200, 20, 20)
+    Frame.BackgroundTransparency = 0.700
+    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Frame.BorderSizePixel = 0
+    Frame.Size = UDim2.new(1, 0, 0, 30)
+  
+    Name.Name = "Name"
+    Name.Parent = Frame
+    Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Name.BackgroundTransparency = 1.000
+    Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Name.BorderSizePixel = 0
+    Name.Position = UDim2.new(0, 5, 0, 5)
+    Name.Size = UDim2.new(0, 100, 1, -10)
+    Name.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    Name.Text = windowTitle
+    Name.TextColor3 = Color3.fromRGB(230, 230, 230)
+    Name.TextSize = 20.000
+    Name.TextXAlignment = Enum.TextXAlignment.Left
+  
+    Min.Name = "Min"
+    Min.Parent = Main
+    Min.AnchorPoint = Vector2.new(1, 1)
+    Min.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Min.BackgroundTransparency = 1.000
+    Min.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Min.BorderSizePixel = 0
+    Min.Position = UDim2.new(0, 370, 0, -5)
+    Min.Size = UDim2.new(0, 20, 0, 20)
+    Min.AutoButtonColor = false
+    Min.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    Min.LineHeight = 0.960
+    Min.Text = "-"
+    Min.TextColor3 = Color3.fromRGB(230, 230, 230)
+    Min.TextSize = 30.000
+  
+    Close.Name = "Close"
+    Close.Parent = Main
+    Close.AnchorPoint = Vector2.new(1, 1)
+    Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Close.BackgroundTransparency = 1.000
+    Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Close.BorderSizePixel = 0
+    Close.Position = UDim2.new(1, -5, 0, -5)
+    Close.Size = UDim2.new(0, 20, 0, 20)
+    Close.AutoButtonColor = false
+    Close.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    Close.LineHeight = 0.960
+    Close.Text = "X"
+    Close.TextColor3 = Color3.fromRGB(230, 230, 230)
+    Close.TextSize = 30.000
 
-ScreenGui.Parent = game.CoreGui
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
+    -- Function to toggle mouse behavior
+    local function toggleMouseBehavior(isFree)
+        local UIS = game:GetService("UserInputService")
+        if isFree then
+            UIS.MouseBehavior = Enum.MouseBehavior.Default
+            UIS.MouseIconEnabled = true  -- Show the mouse cursor
+        else
+            UIS.MouseBehavior = Enum.MouseBehavior.LockCenter
+            UIS.MouseIconEnabled = false  -- Hide the mouse cursor
+        end
+    end
+  
+    -- Scripts
+  
+    -- Show window on key press
+    local function SXVD_fake_script() -- Main.Close 
+        local script = Instance.new('LocalScript', Main)
+        local keycode = Enum.KeyCode.K
+        local UserInputService = game:GetService("UserInputService")
 
-Main.Name = "Main"
-Main.Parent = ScreenGui
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Main.BackgroundTransparency = 0.900
-Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main.Size = UDim2.new(0, 400, 0, 500)
+        UserInputService.InputBegan:Connect(function(Input, gameprocess)
+            if not gameprocess then
+                if Input.KeyCode == keycode then
+                    if script.Parent.Visible == false then
+                        script.Parent.Visible = true
+                        BlurEffect.Enabled = true  -- Enable blur effect
+                        toggleMouseBehavior(true)  -- Enable free mouse movement
+                    else
+                        script.Parent.Visible = false
+                        BlurEffect.Enabled = false  -- Disable blur effect
+                        toggleMouseBehavior(false)  -- Lock mouse to center
+                    end
+                end
+            end
 
-ScrollingFrame.Parent = Main
-ScrollingFrame.Active = true
-ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollingFrame.BackgroundTransparency = 1.000
-ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScrollingFrame.BorderSizePixel = 0
-ScrollingFrame.Position = UDim2.new(0.0274999999, 0, 0.0179999992, 0)
-ScrollingFrame.Size = UDim2.new(0, 378, 0, 481)
-ScrollingFrame.ScrollBarThickness = 7
+        end)
+    end
+    coroutine.wrap(SXVD_fake_script)()
 
-OPgun.Name = "OP gun"
-OPgun.Parent = ScrollingFrame
-OPgun.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-OPgun.BackgroundTransparency = 0.900
-OPgun.BorderColor3 = Color3.fromRGB(0, 0, 0)
-OPgun.BorderSizePixel = 0
-OPgun.Position = UDim2.new(0, 5, 0, 35)
-OPgun.Size = UDim2.new(0, 236, 0, 21)
-OPgun.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-OPgun.Text = "Op Gun"
-OPgun.TextColor3 = Color3.fromRGB(230, 230, 230)
-OPgun.TextSize = 16.000
+    -- Minimize button functionality
 
-Gun.Name = "Gun"
-Gun.Parent = ScrollingFrame
-Gun.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Gun.BackgroundTransparency = 1.000
-Gun.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Gun.Position = UDim2.new(0, 5, 0, 5)
-Gun.Size = UDim2.new(0, 150, 0, 20)
-Gun.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Gun.Text = "Guns"
-Gun.TextColor3 = Color3.fromRGB(230, 230, 230)
-Gun.TextSize = 16.000
-Gun.TextXAlignment = Enum.TextXAlignment.Left
+    local function ZLPM_fake_script() -- Min.LocalScript 
+        local script = Instance.new('LocalScript', Min)
 
-Visual.Name = "Visual"
-Visual.Parent = ScrollingFrame
-Visual.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Visual.BackgroundTransparency = 1.000
-Visual.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Visual.Position = UDim2.new(0, 5, 0, 65)
-Visual.Size = UDim2.new(0, 150, 0, 20)
-Visual.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Visual.Text = "Visual"
-Visual.TextColor3 = Color3.fromRGB(230, 230, 230)
-Visual.TextSize = 16.000
-Visual.TextXAlignment = Enum.TextXAlignment.Left
+        script.Parent.MouseButton1Click:Connect(function()
+            print("CLOSED")
+            local plr = game:GetService("Players").LocalPlayer
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Closed."; -- the title 
+                Text = 'Press "k" to open again.'; -- what the text says 
+                Duration = 10; -- how long the notification should in seconds
+            })
+            script.Parent.Parent.Visible = false
+            BlurEffect.Enabled = false  -- Disable blur effect
+            toggleMouseBehavior(false)  -- Lock mouse to center
+        end)
+    end
+    coroutine.wrap(ZLPM_fake_script)()
 
-ESP.Name = "ESP"
-ESP.Parent = ScrollingFrame
-ESP.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ESP.BackgroundTransparency = 0.900
-ESP.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ESP.BorderSizePixel = 0
-ESP.Position = UDim2.new(0, 5, 0, 95)
-ESP.Size = UDim2.new(0, 236, 0, 21)
-ESP.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-ESP.Text = "ESP"
-ESP.TextColor3 = Color3.fromRGB(230, 230, 230)
-ESP.TextSize = 16.000
+    -- Close button functionality
 
-Other.Name = "Other"
-Other.Parent = ScrollingFrame
-Other.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Other.BackgroundTransparency = 1.000
-Other.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Other.Position = UDim2.new(0, 5, 0, 215)
-Other.Size = UDim2.new(0, 150, 0, 20)
-Other.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Other.Text = "Other"
-Other.TextColor3 = Color3.fromRGB(230, 230, 230)
-Other.TextSize = 16.000
-Other.TextXAlignment = Enum.TextXAlignment.Left
+    local function QRKGSXI_fake_script() -- Close.LocalScript 
+        local script = Instance.new('LocalScript', Close)
 
-INFYEILD.Name = "INF YEILD"
-INFYEILD.Parent = ScrollingFrame
-INFYEILD.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-INFYEILD.BackgroundTransparency = 0.900
-INFYEILD.BorderColor3 = Color3.fromRGB(0, 0, 0)
-INFYEILD.BorderSizePixel = 0
-INFYEILD.Position = UDim2.new(0, 5, 0, 235)
-INFYEILD.Size = UDim2.new(0, 236, 0, 21)
-INFYEILD.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-INFYEILD.Text = "INF YEILD"
-INFYEILD.TextColor3 = Color3.fromRGB(230, 230, 230)
-INFYEILD.TextSize = 16.000
-
-Credits.Name = "Credits"
-Credits.Parent = ScrollingFrame
-Credits.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Credits.BackgroundTransparency = 1.000
-Credits.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Credits.Position = UDim2.new(0, 5, 0, 265)
-Credits.Size = UDim2.new(0, 150, 0, 20)
-Credits.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Credits.Text = "Credits"
-Credits.TextColor3 = Color3.fromRGB(230, 230, 230)
-Credits.TextSize = 16.000
-Credits.TextXAlignment = Enum.TextXAlignment.Left
-
-Fullbright.Name = "Fullbright"
-Fullbright.Parent = ScrollingFrame
-Fullbright.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Fullbright.BackgroundTransparency = 0.900
-Fullbright.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Fullbright.BorderSizePixel = 0
-Fullbright.Position = UDim2.new(0, 5, 0, 125)
-Fullbright.Size = UDim2.new(0, 236, 0, 21)
-Fullbright.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Fullbright.Text = "Fullbright"
-Fullbright.TextColor3 = Color3.fromRGB(230, 230, 230)
-Fullbright.TextSize = 16.000
-
-Credit.Name = "Credit"
-Credit.Parent = ScrollingFrame
-Credit.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Credit.BackgroundTransparency = 0.900
-Credit.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Credit.BorderSizePixel = 0
-Credit.Position = UDim2.new(0, 5, 0, 295)
-Credit.Size = UDim2.new(0, 236, 0, 21)
-Credit.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Credit.Text = "@pen0tra0r"
-Credit.TextColor3 = Color3.fromRGB(230, 230, 230)
-Credit.TextSize = 16.000
-
-Online.Name = "Online"
-Online.Parent = ScrollingFrame
-Online.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-Online.BackgroundTransparency = 1.000
-Online.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Online.Position = UDim2.new(0, 5, 0, 155)
-Online.Size = UDim2.new(0, 150, 0, 20)
-Online.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Online.Text = "Online"
-Online.TextColor3 = Color3.fromRGB(230, 230, 230)
-Online.TextSize = 16.000
-Online.TextXAlignment = Enum.TextXAlignment.Left
-
-OnlineESP.Name = "Online ESP"
-OnlineESP.Parent = ScrollingFrame
-OnlineESP.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-OnlineESP.BackgroundTransparency = 0.900
-OnlineESP.BorderColor3 = Color3.fromRGB(0, 0, 0)
-OnlineESP.BorderSizePixel = 0
-OnlineESP.Position = UDim2.new(0, 5, 0, 185)
-OnlineESP.Size = UDim2.new(0, 236, 0, 21)
-OnlineESP.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-OnlineESP.Text = "Online ESP"
-OnlineESP.TextColor3 = Color3.fromRGB(230, 230, 230)
-OnlineESP.TextSize = 16.000
-
-Frame.Parent = Main
-Frame.AnchorPoint = Vector2.new(0, 1)
-Frame.BackgroundColor3 = Color3.fromRGB(200, 20, 20)
-Frame.BackgroundTransparency = 0.700
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Size = UDim2.new(1, 0, 0, 30)
-
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0, 5, 0, 5)
-TextLabel.Size = UDim2.new(0, 100, 1, -10)
-TextLabel.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-TextLabel.Text = "Hellmet script"
-TextLabel.TextColor3 = Color3.fromRGB(230, 230, 230)
-TextLabel.TextSize = 20.000
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-Min.Name = "Min"
-Min.Parent = Main
-Min.AnchorPoint = Vector2.new(1, 1)
-Min.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Min.BackgroundTransparency = 1.000
-Min.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Min.BorderSizePixel = 0
-Min.Position = UDim2.new(0, 370, 0, -5)
-Min.Size = UDim2.new(0, 20, 0, 20)
-Min.AutoButtonColor = false
-Min.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Min.LineHeight = 0.960
-Min.Text = "-"
-Min.TextColor3 = Color3.fromRGB(230, 230, 230)
-Min.TextSize = 30.000
-
-Close.Name = "Close"
-Close.Parent = Main
-Close.AnchorPoint = Vector2.new(1, 1)
-Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Close.BackgroundTransparency = 1.000
-Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Close.BorderSizePixel = 0
-Close.Position = UDim2.new(1, -5, 0, -5)
-Close.Size = UDim2.new(0, 20, 0, 20)
-Close.AutoButtonColor = false
-Close.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Close.LineHeight = 0.960
-Close.Text = "X"
-Close.TextColor3 = Color3.fromRGB(230, 230, 230)
-Close.TextSize = 30.000
-
--- Scripts:
-
-local function XKJO_fake_script() -- OPgun.LocalScript 
-	local script = Instance.new('LocalScript', OPgun)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		local char = plr.Character
-		local backpack = plr.Backpack
-		local tool = char:FindFirstChildWhichIsA("Tool")
-		tool:SetAttribute("Ammo", math.huge)
-		tool:SetAttribute("ClipSize", math.huge)
-		tool:SetAttribute("Firerate", "1500")
-		tool:SetAttribute("DamageDecreaseAdd", 0)
-		for i,v in pairs(backpack:GetChildren()) do
-			v:SetAttribute("Ammo", math.huge)
-			v:SetAttribute("ClipSize", math.huge)
-			v:SetAttribute("Firerate", "1500")
-			v:SetAttribute("DamageDecreaseAdd", 0)
-		end
-	end)
+        script.Parent.MouseButton1Click:Connect(function()
+            print("CLOSED")
+            script.Parent.Parent.Parent:Destroy()
+            BlurEffect.Enabled = false  -- Disable blur effect
+            toggleMouseBehavior(false)  -- Lock mouse to center
+        end)
+    end
+    coroutine.wrap(QRKGSXI_fake_script)()
+  
+    local window = {}
+  
+    function window:createSection(sectionName)
+        local section = Instance.new("TextLabel")
+  
+        section.Name = sectionName
+        section.Parent = ScrollingFrame
+        section.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+        section.BackgroundTransparency = 1.000
+        section.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        section.Size = UDim2.new(0, 150, 0, 20)
+        section.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+        section.Text = sectionName
+        section.TextColor3 = Color3.fromRGB(230, 230, 230)
+        section.TextSize = 16.000
+        section.TextXAlignment = Enum.TextXAlignment.Left
+  
+        local sectionTable = {}
+  
+        function sectionTable:createButton(buttonName, onClick)
+            local button = Instance.new("TextButton")
+            button.Name = buttonName
+            button.Parent = ScrollingFrame
+            button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            button.BackgroundTransparency = 0.900
+            button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            button.BorderSizePixel = 0
+            button.Size = UDim2.new(0, 236, 0, 21)
+            button.FontFace = Font.new([[rbxasset://fonts/families/RobotoCondensed.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+            button.Text = buttonName
+            button.TextColor3 = Color3.fromRGB(230, 230, 230)
+            button.TextSize = 16.000
+            button.MouseButton1Click:Connect(onClick)
+        end
+  
+        return sectionTable
+    end
+  
+    return window
 end
-coroutine.wrap(XKJO_fake_script)()
-local function CHXS_fake_script() -- ESP.LocalScript 
-	local script = Instance.new('LocalScript', ESP)
 
-	script.Parent.MouseButton1Click:Connect(function()
-		local highlight = Instance.new("Highlight")
-		highlight.Name = "Highlight"
-		while task.wait(2) do
-			for i, v in next, game.workspace:GetChildren() do
-				if v ~= nil then
-					if v.Name ~= game:GetService("Players").LocalPlayer.Name then
-						if v.Name == "Hostile" or v.Name == "TaskForce" then
-							if v:FindFirstChild("HumanoidRootPart") then
-								if not v.HumanoidRootPart:FindFirstChild("Highlight") then
-									local highlightClone = highlight:Clone()
-									highlightClone.Adornee = v
-									highlightClone.Parent = v:FindFirstChild("HumanoidRootPart")
-									highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-									highlightClone.OutlineColor = Color3.fromRGB(170, 85, 255); highlightClone.FillColor = Color3.fromRGB(170, 85, 255)
-									highlightClone.FillTransparency = 0.55; highlightClone.OutlineTransparency = 0.25
-								end
-							end
-						elseif v:FindFirstChild("HumanoidRootPart") then
-							if not v.HumanoidRootPart:FindFirstChild("Highlight") then
-								local highlightClone = highlight:Clone()
-								highlightClone.Adornee = v
-								highlightClone.Parent = v:FindFirstChild("HumanoidRootPart")
-								highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-								highlightClone.FillTransparency = 0.55; highlightClone.OutlineTransparency = 0.25
-							end
-						end
-					end
-				end
-			end
-		end
-		print("ESP loaded")
-	end)
-end
-coroutine.wrap(CHXS_fake_script)()
-local function IMQB_fake_script() -- INFYEILD.LocalScript 
-	local script = Instance.new('LocalScript', INFYEILD)
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
-	script.Parent.MouseButton1Click:Connect(function()
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-	end)
-end
-coroutine.wrap(IMQB_fake_script)()
-local function FPGFQU_fake_script() -- Fullbright.LocalScript 
-	local script = Instance.new('LocalScript', Fullbright)
+local TeleportCheck = false
+game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+	if (not TeleportCheck) and queueteleport then
+		TeleportCheck = true
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()")
+	end
+end)
 
-	script.Parent.MouseButton1Click:Connect(function()
-		local Lighting = game:GetService("Lighting")
-		Lighting.Brightness = 0
-		Lighting.ClockTime = 14
-		Lighting.FogEnd = 100000
-		Lighting.GlobalShadows = false
-		Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
-	end)
-end
-coroutine.wrap(FPGFQU_fake_script)()
-local function IOKGG_fake_script() -- OnlineESP.LocalScript 
-	local script = Instance.new('LocalScript', OnlineESP)
+local window = createWindow("Hellmet")
+local mainSection = window:createSection("Main")
 
-	script.Parent.MouseButton1Click:Connect(function()
-		local camera = game.Workspace.CurrentCamera
+mainSection:createButton("Op gun", function()
+      local plr = game.Players.LocalPlayer
+      local char = plr.Character
+      local backpack = plr.Backpack
+      
+      local function updateTools()
+          local tool = char:FindFirstChildWhichIsA("Tool")
+          if tool then
+              tool:SetAttribute("Ammo", math.huge)
+              tool:SetAttribute("ClipSize", math.huge)
+              tool:SetAttribute("Firerate", 1500)
+              tool:SetAttribute("DamageDecreaseAdd", 0)
+          end
+          for i, v in pairs(backpack:GetChildren()) do
+              if v:IsA("Tool") then
+                  v:SetAttribute("Ammo", math.huge)
+                  v:SetAttribute("ClipSize", math.huge)
+                  v:SetAttribute("Firerate", 1500)
+                  v:SetAttribute("DamageDecreaseAdd", 0)
+              end
+          end
+      end
+      
+      -- Initial update
+      updateTools()
+end)
+
+mainSection:createButton("Online ESP", function()
+    local plr = game.Players.LocalPlayer
+    local camera = game.Workspace.CurrentCamera
 	
 		function isTeammate(player)
 			if player and player.Team and plr.Team then
@@ -416,87 +345,89 @@ local function IOKGG_fake_script() -- OnlineESP.LocalScript
 		game.Players.PlayerAdded:Connect(function(newplr)
 			createESP(newplr)
 		end)
-	end)
-end
-coroutine.wrap(IOKGG_fake_script)()
-local function ZTMKLZV_fake_script() -- Frame.Drag 
-	local script = Instance.new('LocalScript', Frame)
+end)
 
-	local UIS = game:GetService('UserInputService')
-	local frame = script.Parent
-	local dragToggle = nil
-	local dragSpeed = 0.25
-	local dragStart = nil
-	local startPos = nil
-	
-	local function updateInput(input)
-		local delta = input.Position - dragStart
-		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		game:GetService('TweenService'):Create(frame.Parent, TweenInfo.new(dragSpeed), {Position = position}):Play()
+local VisualSection = window:createSection("Visual")
+
+VisualSection:createButton("Fullbright", function()
+    local Lighting = game:GetService("Lighting")
+		Lighting.Brightness = 0
+		Lighting.ClockTime = 14
+		Lighting.FogEnd = 100000
+		Lighting.GlobalShadows = false
+		Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+end)
+
+VisualSection:createButton("Remove shell casing", function()
+	for _, model in pairs(game:GetService("ReplicatedStorage").Modules.Client.BulletShells:GetChildren()) do
+		for _,shell in pairs(model:GetChildren()) do
+			shell.Transparency = 1
+		end
 	end
-	
-	frame.InputBegan:Connect(function(input)
-		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
-			dragToggle = true
-			dragStart = input.Position
-			startPos = frame.Parent.Position
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragToggle = false
+end)
+
+VisualSection:createButton("Remove screen effects", function()
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Effects").Enabled = false
+end)
+
+local StorySection = window:createSection("Story")
+
+StorySection:createButton("ESP", function()
+    local highlight = Instance.new("Highlight")
+		highlight.Name = "Highlight"
+		while task.wait(2) do
+			for i, v in next, game.workspace:GetChildren() do
+				if v ~= nil then
+					if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+						if v.Name == "Hostile" or v.Name == "TaskForce" then
+							if v:FindFirstChild("HumanoidRootPart") then
+								if not v.HumanoidRootPart:FindFirstChild("Highlight") then
+									local highlightClone = highlight:Clone()
+									highlightClone.Adornee = v
+									highlightClone.Parent = v:FindFirstChild("HumanoidRootPart")
+									highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+									highlightClone.FillTransparency = 0.55; highlightClone.OutlineTransparency = 0.25
+								end
+							end
+						elseif v:FindFirstChild("HumanoidRootPart") then
+							if not v.HumanoidRootPart:FindFirstChild("Highlight") then
+								local highlightClone = highlight:Clone()
+								highlightClone.Adornee = v
+								highlightClone.Parent = v:FindFirstChild("HumanoidRootPart")
+								highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+								highlightClone.OutlineColor = Color3.fromRGB(0, 128, 0); highlightClone.FillColor = Color3.fromRGB(0, 128, 0)
+								highlightClone.FillTransparency = 0.55; highlightClone.OutlineTransparency = 0.25
+							end
+						end
+					end
 				end
-			end)
-		end
-	end)
-	
-	UIS.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			if dragToggle then
-				updateInput(input)
 			end
 		end
-	end)
-end
-coroutine.wrap(ZTMKLZV_fake_script)()
-local function GIWBO_fake_script() -- Main.Close 
-	local script = Instance.new('LocalScript', Main)
+		print("ESP loaded")
+end)
 
-	local FrameObject = script.Parent -- Change Stats to whatever your frame is called
-	local Open = true
-	local keycode = Enum.KeyCode.K
-	
-	local UserInputService = game:GetService("UserInputService")
-	
-	UserInputService.InputBegan:Connect(function(Input, gameprocess)
-		if not gameprocess then
-			if Input.KeyCode == keycode then
-				script.Parent.Visible = true -- Change Stats to whatever your frame is called
-			end
-		end
-		
-	end)
-end
-coroutine.wrap(GIWBO_fake_script)()
-local function OOHN_fake_script() -- Min.LocalScript 
-	local script = Instance.new('LocalScript', Min)
+StorySection:createButton("Find keycard", function()
+    local keycard = game:GetService("Workspace").Map.Geometry.CameraRoom.KeycardSpawns:FindFirstChild("Keycard")
+    if keycard then
+        local h3 = Instance.new("Highlight", keycard)
+        h3.FillColor = Color3.fromRGB(170, 85, 255)
+    end
+end)
 
-	script.Parent.MouseButton1Click:Connect(function()
-		print("CLOSED")
-		game.StarterGui:SetCore("SendNotification", {
-			Title = "Closed."; -- the title 
-			Text = 'Press "k" to open again.'; -- what the text says 
-			Duration = 10; -- how long the notification should in secounds
-		})
-		script.Parent.Parent.Visible = false
-	end)
-end
-coroutine.wrap(OOHN_fake_script)()
-local function MJSHDU_fake_script() -- Close.LocalScript 
-	local script = Instance.new('LocalScript', Close)
+StorySection:createButton("Objective ESP", function()
+    local objectives = game:GetService("Workspace").Map.Objectives
+    for _, o in pairs(objectives:GetChildren()) do
+        local h1 = Instance.new("Highlight", o)
+        h1.FillColor = Color3.fromRGB(170, 85, 255)
+    end
+    objectives.ChildAdded:Connect(function(ob)
+        local h2 = Instance.new("Highlight", ob)
+        h2.FillColor = Color3.fromRGB(170, 85, 255)
+    end)
+end)
 
-	script.Parent.MouseButton1Click:Connect(function()
-		print("CLOSED")
-		script.Parent.Parent.Parent:Destroy()
-	end)
-end
-coroutine.wrap(MJSHDU_fake_script)()
+local OtherSection = window:createSection("Other")
+
+OtherSection:createButton("Infinite yield", function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
