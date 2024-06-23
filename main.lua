@@ -166,6 +166,7 @@ function createWindow(windowTitle)
             print("CLOSED")
             script.Parent.Parent.Parent:Destroy()
             BlurEffect.Enabled = false  -- Disable blur effect
+            toggleMouseBehavior(false)  -- Lock mouse to center
         end)
     end
     coroutine.wrap(QRKGSXI_fake_script)()
@@ -221,35 +222,62 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 	end
 end)
 
-local window = createWindow("Hellmet")
+local MarketplaceService = game:GetService("MarketplaceService")
+
+-- Replace 'PlaceId' with the actual PlaceId you want to fetch information for
+local PlaceId = game.placeId
+
+-- Fetching product information
+local success, Asset = pcall(function()
+    return MarketplaceService:GetProductInfo(PlaceId)
+end)
+
+if success then
+    -- Assuming Asset.Name is the name of the place retrieved from MarketplaceService
+    local placeName = "Place Name: " .. Asset.Name
+    print(placeName)  -- Example: "Place Name: DECOVERNANT"
+else
+    warn("Failed to fetch place information")
+end
+
+local window = createWindow(Asset.Name .. " | " .. "Pen0trat0r")
 local mainSection = window:createSection("Main")
 
 mainSection:createButton("Op gun", function()
-      local plr = game.Players.LocalPlayer
-      local char = plr.Character
-      local backpack = plr.Backpack
-      
-      local function updateTools()
-          local tool = char:FindFirstChildWhichIsA("Tool")
-          if tool then
-              tool:SetAttribute("Ammo", math.huge)
-              tool:SetAttribute("ClipSize", math.huge)
-              tool:SetAttribute("Firerate", 1500)
-              tool:SetAttribute("DamageDecreaseAdd", 0)
-          end
-          for i, v in pairs(backpack:GetChildren()) do
-              if v:IsA("Tool") then
-                  v:SetAttribute("Ammo", math.huge)
-                  v:SetAttribute("ClipSize", math.huge)
-                  v:SetAttribute("Firerate", 1500)
-                  v:SetAttribute("DamageDecreaseAdd", 0)
-              end
-          end
-      end
-      
-      -- Initial update
-      updateTools()
+    local function updateTools()
+        local plr = game.Players.LocalPlayer
+        local char = plr.Character
+        local backpack = plr.Backpack
+        if char then
+            local tool = char:FindFirstChildWhichIsA("Tool")
+            if tool then
+                tool:SetAttribute("Ammo", math.huge)
+                tool:SetAttribute("ClipSize", math.huge)
+                tool:SetAttribute("Firerate", 1500)
+                tool:SetAttribute("DamageDecreaseAdd", 0)
+            end
+        end
+        for _, v in pairs(backpack:GetChildren()) do
+            if v:IsA("Tool") then
+                v:SetAttribute("Ammo", math.huge)
+                v:SetAttribute("ClipSize", math.huge)
+                v:SetAttribute("Firerate", 1500)
+                v:SetAttribute("DamageDecreaseAdd", 0)
+            end
+        end
+    end
+
+    -- Initial update
+    updateTools()
+
+    -- Loop to update every 10 seconds
+    while true do
+        wait(10)
+        print("updating")
+        updateTools()
+    end
 end)
+
 
 mainSection:createButton("Online ESP", function()
     local plr = game.Players.LocalPlayer
@@ -430,3 +458,65 @@ local OtherSection = window:createSection("Other")
 OtherSection:createButton("Infinite yield", function()
       loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
+
+if game.PlaceId == 13943784614 then
+    OtherSection:createButton("DECOVENANT", function()
+        local TweenService = game:GetService("TweenService")
+        local Players = game:GetService("Players")
+
+        local Player = Players.LocalPlayer
+        local Character = Player.Character or Player.CharacterAdded:Wait()
+        local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+        local Keycard = game:GetService("Workspace").Map.Geometry.CameraRoom.KeycardSpawns:FindFirstChild("Keycard")
+
+        -- Ensure Keycard exists
+        if not Keycard then
+            warn("Keycard not found!")
+            return
+        end
+
+        Keycard = Keycard.Base
+
+        -- Function to enable/disable collisions for the character
+        local function setNoclip(enabled)
+            for _, part in ipairs(Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = not enabled
+                end
+            end
+        end
+
+        -- Function to create and play a tween to a target position
+        local function tweenToPosition(targetPosition, duration)
+            local tweenInfo = TweenInfo.new(
+                duration, -- Time in seconds to complete the tween
+                Enum.EasingStyle.Linear, -- Easing style
+                Enum.EasingDirection.Out, -- Easing direction
+                0, -- Number of times to repeat
+                false, -- Should tween reverse after completing?
+                0 -- Delay before repeating
+            )
+
+            local goal = {
+                CFrame = CFrame.new(targetPosition),
+            }
+
+            -- Enable noclip before starting the tween
+            setNoclip(true)
+
+            local tween = TweenService:Create(HumanoidRootPart, tweenInfo, goal)
+            tween:Play()
+
+            -- Disable noclip after the tween completes
+            tween.Completed:Connect(function()
+                setNoclip(false)
+            end)
+
+            return tween
+        end
+
+        -- Move to the keycard
+        local keycardTween = tweenToPosition(Keycard.Position, 10)
+        keycardTween.Completed:Wait()
+    end)
+end
