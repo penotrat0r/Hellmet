@@ -9,6 +9,7 @@ function createWindow(windowTitle)
     local Min = Instance.new("TextButton")
     local Close = Instance.new("TextButton")
     local BlurEffect = Instance.new("BlurEffect")  -- BlurEffect instance
+    local ThumbnailImage = Instance.new("ImageLabel")
   
     -- Set Properties
     ScreenGui.Parent = game.CoreGui
@@ -98,15 +99,33 @@ function createWindow(windowTitle)
     Close.TextColor3 = Color3.fromRGB(230, 230, 230)
     Close.TextSize = 30.000
 
+    -- Thumbnail Image Properties
+    ThumbnailImage.Name = "ThumbnailImage"
+    ThumbnailImage.Parent = Main
+    ThumbnailImage.Size = UDim2.new(0, 100, 0, 100)
+    ThumbnailImage.Position = UDim2.new(1, -105, 1, -105)  -- Position in the bottom right corner
+    ThumbnailImage.BackgroundTransparency = 1.000
+    ThumbnailImage.BorderSizePixel = 0
+
+    -- Load Player Thumbnail
+    local plrs = game:GetService("Players")
+    local plr = game.Players.LocalPlayer
+    local content, isReady = plrs:GetUserThumbnailAsync(plr.UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size100x100)
+    ThumbnailImage.Image = content
+
     -- Function to toggle mouse behavior
     local function toggleMouseBehavior(isFree)
         local UIS = game:GetService("UserInputService")
         if isFree then
             UIS.MouseBehavior = Enum.MouseBehavior.Default
             UIS.MouseIconEnabled = true  -- Show the mouse cursor
+            game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = false
         else
             UIS.MouseBehavior = Enum.MouseBehavior.LockCenter
-            UIS.MouseIconEnabled = false  -- Hide the mouse cursor
+            if game.placeId ~= 13815196156 then
+                UIS.MouseIconEnabled = false  -- Hide the mouse cursor
+            end
+            game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = true
         end
     end
   
@@ -125,10 +144,14 @@ function createWindow(windowTitle)
                         script.Parent.Visible = true
                         BlurEffect.Enabled = true  -- Enable blur effect
                         toggleMouseBehavior(true)  -- Enable free mouse movement
+                        game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = false
                     else
                         script.Parent.Visible = false
                         BlurEffect.Enabled = false  -- Disable blur effect
-                        toggleMouseBehavior(false)  -- Lock mouse to center
+                        if game.placeId ~= 13815196156 then
+                            toggleMouseBehavior(false)  -- Lock mouse to center
+                        end
+                        game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = true
                     end
                 end
             end
@@ -152,7 +175,9 @@ function createWindow(windowTitle)
             })
             script.Parent.Parent.Visible = false
             BlurEffect.Enabled = false  -- Disable blur effect
-            toggleMouseBehavior(false)  -- Lock mouse to center
+            if game.placeId ~= 13815196156 then
+                toggleMouseBehavior(false)  -- Lock mouse to center
+            end
         end)
     end
     coroutine.wrap(ZLPM_fake_script)()
@@ -278,6 +303,43 @@ mainSection:createButton("Op gun", function()
     end
 end)
 
+mainSection:createButton("Inf ammo", function()
+    local plr = game.Players.LocalPlayer
+    local char = plr.Character
+    local backpack = plr.Backpack
+    if char then
+        local tool = char:FindFirstChildWhichIsA("Tool")
+        if tool then
+            tool:SetAttribute("Ammo", math.huge)
+            tool:SetAttribute("ClipSize", math.huge)
+        end
+    end
+    for _, v in pairs(backpack:GetChildren()) do
+        if v:IsA("Tool") then
+            v:SetAttribute("Ammo", math.huge)
+            v:SetAttribute("ClipSize", math.huge)
+        end
+    end
+end)
+
+mainSection:createButton("Fast Firerate", function()
+    local plr = game.Players.LocalPlayer
+    local char = plr.Character
+    local backpack = plr.Backpack
+    if char then
+        local tool = char:FindFirstChildWhichIsA("Tool")
+        if tool then
+            tool:SetAttribute("Firerate", tool:GetAttribute("Firerate") + 100)
+            tool:SetAttribute("DamageDecreaseAdd", 0)
+        end
+    end
+    for _, v in pairs(backpack:GetChildren()) do
+        if v:IsA("Tool") then
+            v:SetAttribute("Firerate", v:GetAttribute("Firerate") + 100)
+            v:SetAttribute("DamageDecreaseAdd", 0)
+        end
+    end
+end)
 
 mainSection:createButton("Online ESP", function()
     local plr = game.Players.LocalPlayer
@@ -460,7 +522,8 @@ OtherSection:createButton("Infinite yield", function()
 end)
 
 if game.PlaceId == 13943784614 then
-    OtherSection:createButton("DECOVENANT", function()
+    local DECOVENANTSection = window:createSection("DECOVENANT")
+    DECOVENANTSection:createButton("Tp to keycard", function()
         local TweenService = game:GetService("TweenService")
         local Players = game:GetService("Players")
 
