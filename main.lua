@@ -369,7 +369,7 @@ mainSection:createButton("Big Heads", function()
         	end
 	    end
     end
-end
+end)
 
 
 local gunSection = window:createSection("Gun")
