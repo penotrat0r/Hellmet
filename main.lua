@@ -342,6 +342,36 @@ createNotif("Press 'k' to make ui visable.")
 
 local window = createWindow(Asset.Name .. " | " .. "Pen0trat0r")
 
+local mainSection = window:createSection("Main")
+
+mainSection:createButton("Big Heads", function()
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "Highlight"
+    while task.wait(2) do
+        for i, v in next, game.Workspace:GetChildren() do
+	    	if v ~= nil then
+            	if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+              		if v.Name == "Hostile" or v.Name == "TaskForce" then
+	    				if v:FindFirstChild("HumanoidRootPart") then
+                    		if not v.HumanoidRootPart:FindFirstChild("Highlight") then
+                	    		local highlightClone = highlight:Clone()
+                       			highlightClone.Adornee = v
+                        		highlightClone.Parent = v:FindFirstChild("HumanoidRootPart")
+                    			highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	    						highlightClone.FillTransparency = 0.65; highlightClone.OutlineTransparency = 0.25
+	    						v.Head.Size = Vector3.new(4,4,4)
+	    						v.Head.Transparency = 0.7
+	    						v.Head.CanCollide = false
+                	    	end
+	    				end
+                    end
+	    		end
+        	end
+	    end
+    end
+end
+
+
 local gunSection = window:createSection("Gun")
 
 gunSection:createButton("Op gun", function()
