@@ -417,23 +417,6 @@ gunSection:createButton("Fast Firerate", function()
 	end
 end)
 
-gunSection:createButton("No recoil", function()
-	local plr = game.Players.LocalPlayer
-	local char = plr.Character
-	local backpack = plr.Backpack
-	if char then
-		local tool = char:FindFirstChildWhichIsA("Tool")
-		if tool then
-			tool:SetAttribute("Recoil", 0)
-		end
-	end
-	for _, v in pairs(backpack:GetChildren()) do
-		if v:IsA("Tool") then
-			v:SetAttribute("Recoil", 0)
-		end
-	end
-end)
-
 local VisualSection = window:createSection("Visual")
 
 VisualSection:createButton("ESP", function()
