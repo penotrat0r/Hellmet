@@ -9,7 +9,6 @@ function createWindow(windowTitle)
 	local Min = Instance.new("TextButton")
 	local Close = Instance.new("TextButton")
 	local BlurEffect = Instance.new("BlurEffect")  -- BlurEffect instance
-	local ThumbnailImage = Instance.new("ImageLabel")
 
 	-- Set Properties
 	ScreenGui.Parent = game.CoreGui
@@ -99,20 +98,6 @@ function createWindow(windowTitle)
 	Close.Text = "X"
 	Close.TextColor3 = Color3.fromRGB(230, 230, 230)
 	Close.TextSize = 30.000
-
-	-- Thumbnail Image Properties
-	ThumbnailImage.Name = "ThumbnailImage"
-	ThumbnailImage.Parent = Main
-	ThumbnailImage.Size = UDim2.new(0, 100, 0, 100)
-	ThumbnailImage.Position = UDim2.new(1, -105, 1, -105)  -- Position in the bottom right corner
-	ThumbnailImage.BackgroundTransparency = 1.000
-	ThumbnailImage.BorderSizePixel = 0
-
-	-- Load Player Thumbnail
-	local plrs = game.Players
-	local plr = game.Players.LocalPlayer
-	local content, isReady = plrs:GetUserThumbnailAsync(plr.UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size100x100)
-	ThumbnailImage.Image = content
 
 	-- Function to toggle mouse behavior
 	local function toggleMouseBehavior(isFree)
