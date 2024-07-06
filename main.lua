@@ -312,10 +312,19 @@ function createNotif(description)
 	sound.SoundId = [[rbxassetid://5307532209]]
 	UI["sound"] = sound
 
-	-- Create LocalScript to Play Sound
+	-- Create LocalScript to Play Sound and Destroy after 7.5 seconds
 	local soundScript = Instance.new("LocalScript", screenGui)
 	soundScript.Parent.Sound:Play()
 	UI["soundScript"] = soundScript
+
+	-- Create LocalScript to auto-destroy after 7.5 seconds
+	local function TVGMFH_fake_script() -- ScreenGui.LocalScript 
+		local script = Instance.new('LocalScript', screenGui)
+
+		wait(5)
+		script.Parent:Destroy()
+	end
+	coroutine.wrap(TVGMFH_fake_script)()
 
 	return UI
 end
@@ -338,7 +347,7 @@ local success, Asset = pcall(function()
 	return MarketplaceService:GetProductInfo(PlaceId)
 end)
 
-createNotif("Press 'k' to make ui visable.")
+createNotif("Press 'k' to make ui visible.")
 
 local window = createWindow(Asset.Name .. " | " .. "Pen0trat0r")
 
