@@ -8,17 +8,11 @@ function createWindow(windowTitle)
 	local Name = Instance.new("TextLabel")
 	local Min = Instance.new("TextButton")
 	local Close = Instance.new("TextButton")
-	local BlurEffect = Instance.new("BlurEffect")  -- BlurEffect instance
 
 	-- Set Properties
 	ScreenGui.Parent = game.CoreGui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ScreenGui.ResetOnSpawn = false
-
-	-- BlurEffect Properties
-	BlurEffect.Parent = game.Lighting
-	BlurEffect.Size = 24  -- Adjust the blur size as needed
-	BlurEffect.Enabled = false  -- Initially disabled
 
 	Main.Name = "Main"
 	Main.Parent = ScreenGui
@@ -128,12 +122,10 @@ function createWindow(windowTitle)
 				if Input.KeyCode == keycode then
 					if script.Parent.Visible == false then
 						script.Parent.Visible = true
-						BlurEffect.Enabled = true  -- Enable blur effect
 						toggleMouseBehavior(true)  -- Enable free mouse movement
 						game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = false
 					else
 						script.Parent.Visible = false
-						BlurEffect.Enabled = false  -- Disable blur effect
 						if game.placeId ~= 13815196156 then
 							toggleMouseBehavior(false)  -- Lock mouse to center
 						end
@@ -160,7 +152,6 @@ function createWindow(windowTitle)
 				Duration = 10; -- how long the notification should in seconds
 			})
 			script.Parent.Parent.Visible = false
-			BlurEffect.Enabled = false  -- Disable blur effect
 			if game.placeId ~= 13815196156 then
 				toggleMouseBehavior(false)  -- Lock mouse to center
 			end
@@ -176,7 +167,6 @@ function createWindow(windowTitle)
 		script.Parent.MouseButton1Click:Connect(function()
 			print("CLOSED")
 			script.Parent.Parent.Parent:Destroy()
-			BlurEffect.Enabled = false  -- Disable blur effect
 			toggleMouseBehavior(false)  -- Lock mouse to center
 		end)
 	end
