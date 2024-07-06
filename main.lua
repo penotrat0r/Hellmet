@@ -349,7 +349,7 @@ end)
 
 createNotif("Press 'k' to make ui visible.")
 
-local window = createWindow(Asset.Name .. " | " .. "Pen0trat0r")
+local window = createWindow(Asset.Name)
 
 local mainSection = window:createSection("Main")
 
@@ -378,6 +378,26 @@ mainSection:createButton("Big Heads", function()
         	end
 	    end
     end
+end)
+
+mainSection:createButton("Auto intimidate", function()
+	local function Intimidate()
+		while task.wait(0.025) do
+			for i = 1, 2 do
+				local args = { [1] = Vector3.new(-0.041778575628995895, -0.09095385670661926, 0.9949783086776733) }
+				game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Replication"):WaitForChild("Intimidate"):FireServer(unpack(args))
+				local args = { [1] = Vector3.new(0.9934772849082947, -0.11377045512199402, -0.007680955342948437) }
+				game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Replication"):WaitForChild("Intimidate"):FireServer(unpack(args))
+				local args = { [1] = Vector3.new(0.0535888597369194, -0.1127776950597763, -0.9921740293502808) }
+				game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Replication"):WaitForChild("Intimidate"):FireServer(unpack(args))
+				local args = { [1] = Vector3.new(-0.9832711219787598, -0.1807088851928711, 0.0228499174118042) }
+				game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Replication"):WaitForChild("Intimidate"):FireServer(unpack(args))
+			end
+		end
+	end
+
+	-- Start Intimidate function
+	task.spawn(Intimidate)
 end)
 
 local itemSection = window:createSection("Items")
