@@ -380,10 +380,27 @@ mainSection:createButton("Big Heads", function()
     end
 end)
 
+local itemSection = window:createSection("Items")
 
-local gunSection = window:createSection("Gun")
+itemSection:createButton("Fast Interact", function()
+    local plr = game.Players.LocalPlayer
+    local char = plr.Character
+    local backpack = plr.Backpack
 
-gunSection:createButton("Op gun", function()
+    while true do
+        wait(0.1)
+        local zipties = char:FindFirstChild("Zipties")
+        if zipties then
+            zipties:SetAttribute("ZipTime", 0)
+        end
+        local Lockpick = char:FindFirstChild("Lockpick")
+        if Lockpick then
+            Lockpick:SetAttribute("BaseLockpickTime", 0)
+        end
+    end
+end)
+
+itemSection:createButton("Op gun", function()
 	local function updateTools()
 		local plr = game.Players.LocalPlayer
 		local char = plr.Character
@@ -418,7 +435,7 @@ gunSection:createButton("Op gun", function()
 	end
 end)
 
-gunSection:createButton("Inf ammo", function()
+itemSection:createButton("Inf ammo", function()
 	local plr = game.Players.LocalPlayer
 	local char = plr.Character
 	local backpack = plr.Backpack
@@ -437,7 +454,7 @@ gunSection:createButton("Inf ammo", function()
 	end
 end)
 
-gunSection:createButton("Fast Firerate", function()
+itemSection:createButton("Fast Firerate", function()
 	local plr = game.Players.LocalPlayer
 	local char = plr.Character
 	local backpack = plr.Backpack
