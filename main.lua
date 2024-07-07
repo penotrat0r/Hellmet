@@ -358,7 +358,7 @@ mainSection:createButton("Big Heads", function()
                         		highlightClone.Parent = v:FindFirstChild("HumanoidRootPart")
                     			highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	    						highlightClone.FillTransparency = 0.65; highlightClone.OutlineTransparency = 0.25
-	    						v.Head.Size = Vector3.new(4,4,4)
+	    						v.Head.Size = Vector3.new(5,5,5)
 	    						v.Head.Transparency = 0.7
 	    						v.Head.CanCollide = false
                 	    	end
@@ -613,6 +613,29 @@ VisualSection:createButton("Online ESP", function()
 		createESP(newplr)
 	end)
 end)
+
+VisualSection:createButton("Objective ESP",  function()
+    local objectives = game:GetService("Workspace").Map.Objectives
+    for _, o in pairs(objectives:GetChildren()) do
+        local h1 = Instance.new("Highlight", o)
+    end
+    objectives.ChildAdded:Connect(function(ob)
+        local h2 = Instance.new("Highlight", ob)
+        h2.OutlineColor = Color3.fromRGB(0, 128, 0); h2.FillColor = Color3.fromRGB(0, 128, 0)
+        h2.FillTransparency = 0.55; h2.OutlineTransparency = 0.25
+    end)
+end)
+
+if game.placeId == 1394378614 then
+    VisualSection:createButton("Check for Keycard",  function()
+        local keycard = game:GetService("Workspace").Map.Geometry.CameraRoom.KeycardSpawns:FindFirstChild("Keycard")
+        if keycard then
+            local h3 = Instance.new("Highlight", keycard)
+            h3.OutlineColor = Color3.fromRGB(0, 128, 0); h3.FillColor = Color3.fromRGB(0, 128, 0)
+            h3.FillTransparency = 0.55; h3.OutlineTransparency = 0.25
+        end
+    end)
+end
 
 VisualSection:createButton("Fullbright", function()
 	local Lighting = game:GetService("Lighting")
