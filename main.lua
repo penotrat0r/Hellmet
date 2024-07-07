@@ -1,5 +1,4 @@
 function createWindow(windowTitle)
-	-- Create Instances
 	local ScreenGui = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local ScrollingFrame = Instance.new("ScrollingFrame")
@@ -9,7 +8,6 @@ function createWindow(windowTitle)
 	local Min = Instance.new("TextButton")
 	local Close = Instance.new("TextButton")
 
-	-- Set Properties
 	ScreenGui.Parent = game.CoreGui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ScreenGui.ResetOnSpawn = false
@@ -93,17 +91,16 @@ function createWindow(windowTitle)
 	Close.TextColor3 = Color3.fromRGB(230, 230, 230)
 	Close.TextSize = 30.000
 
-	-- Function to toggle mouse behavior
 	local function toggleMouseBehavior(isFree)
 		local UIS = game:GetService("UserInputService")
 		if isFree then
 			UIS.MouseBehavior = Enum.MouseBehavior.Default
-			UIS.MouseIconEnabled = true  -- Show the mouse cursor
+			UIS.MouseIconEnabled = true 
 			game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = false
 		else
 			UIS.MouseBehavior = Enum.MouseBehavior.LockCenter
 			if game.placeId ~= 13815196156 then
-				UIS.MouseIconEnabled = false  -- Hide the mouse cursor
+				UIS.MouseIconEnabled = false  
 			end
 			game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = true
 		end
@@ -111,7 +108,6 @@ function createWindow(windowTitle)
 
 	-- Scripts
 
-	-- Show window on key press
 	local function SXVD_fake_script() -- Main.Close 
 		local script = Instance.new('LocalScript', Main)
 		local keycode = Enum.KeyCode.K
@@ -122,12 +118,12 @@ function createWindow(windowTitle)
 				if Input.KeyCode == keycode then
 					if script.Parent.Visible == false then
 						script.Parent.Visible = true
-						toggleMouseBehavior(true)  -- Enable free mouse movement
+						toggleMouseBehavior(true)
 						game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = false
 					else
 						script.Parent.Visible = false
 						if game.placeId ~= 13815196156 then
-							toggleMouseBehavior(false)  -- Lock mouse to center
+							toggleMouseBehavior(false)
 						end
 						game.Players.LocalPlayer.PlayerGui.Menu.MainMenu.Buttons.Visible = true
 					end
@@ -138,7 +134,6 @@ function createWindow(windowTitle)
 	end
 	coroutine.wrap(SXVD_fake_script)()
 
-	-- Minimize button functionality
 
 	local function ZLPM_fake_script() -- Min.LocalScript 
 		local script = Instance.new('LocalScript', Min)
@@ -619,6 +614,28 @@ end)
 
 local VisualSection = window:createSection("Visual")
 
+VisualSection:createButton("Trap ESP", function()
+    local doors = game.Workspace.Map.Doors:GetChildren()
+
+    while true do
+        wait(3)
+        for _, door in pairs(doors) do
+            if door:IsA("Model") then
+                if not door:FindFirstChild("Highlight") then
+                    local grenade = door:FindFirstChild("Grenade")
+                    if grenade then
+                       local h3 = Instance.new("Highlight", door)
+                        h3.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                        h3.FillColor = Color3.fromRGB(255, 0, 0)
+                        h3.FillTransparency = 0.55
+                        h3.OutlineTransparency = 0.25
+                    end
+                end
+            end
+        end
+    end
+end)
+
 VisualSection:createButton("ESP", function()
 	local highlight = Instance.new("Highlight")
 	highlight.Name = "Highlight"
@@ -672,18 +689,6 @@ VisualSection:createButton("Fullbright", function()
 	Lighting.FogEnd = 100000
 	Lighting.GlobalShadows = false
 	Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
-end)
-
-VisualSection:createButton("Remove shell casing", function()
-	for _, model in pairs(game:GetService("ReplicatedStorage").Modules.Client.BulletShells:GetChildren()) do
-		for _,shell in pairs(model:GetChildren()) do
-			shell.Transparency = 1
-		end
-	end
-end)
-
-VisualSection:createButton("Remove screen effects", function()
-	game.Players.LocalPlayer.PlayerGui:WaitForChild("Effects").Enabled = false
 end)
 
 local OtherSection = window:createSection("Other")
